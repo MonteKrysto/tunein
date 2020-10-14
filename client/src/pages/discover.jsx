@@ -28,6 +28,7 @@ const Discover = () => {
 					{tags &&
 						tags.map((tag, idx) => (
 							<Card
+								to={`/discover/${tag}`}
 								key={idx}
 								height="40"
 								width="15rem"
