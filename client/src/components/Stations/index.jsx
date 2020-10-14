@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge, Box, Image } from "@chakra-ui/core";
 import { Card } from "../Card";
+import { Search } from '../Search';
 
 /**
  * Render a grid of all the stations
