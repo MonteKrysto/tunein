@@ -17,7 +17,7 @@ const Search = () => {
 				}
 				return acc;
 			}, []);
-		
+
 			setSearchResults(names);
 		} else {
 			setSearchResults("");
@@ -27,7 +27,6 @@ const Search = () => {
 
 	return (
 		<>
-			{console.log("searchRes: ", searchResults)}
 			<Input
 				onChange={(e) => handleChange(e)}
 				placeholder="Search Stations"
