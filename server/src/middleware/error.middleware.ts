@@ -9,7 +9,7 @@ export const errorHandler = (
 ) => {
   const status = error.statusCode || 500;
   const message =
-    error.message || "We have encountered an issue, please try again";
+    error.message || "We have encountered a problem, please try again";
 
   response.status(status).send(message);
 };

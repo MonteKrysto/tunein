@@ -1,0 +1,8 @@
+[
+	{
+		"station": "Latin Hits",
+		"duration": 200,
+		"tagUsed": "latin",
+		"user": { "email": "locke@lamora.com", "password": "donlorenzo" }
+	}
+]

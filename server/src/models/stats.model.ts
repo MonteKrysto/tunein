@@ -1,8 +1,15 @@
 import { Document, Schema, Model, model } from "mongoose";
-import { IStat } from "../interfaces";
+import { IUser } from "../interfaces/user.interface";
 import bcrypt from "bcrypt-nodejs";
 
-
+export type StatModel = Document & {
+	id: number;
+	station: string;
+	duration: number;
+	tagUsed?: string | null;
+	user: IUser;
+	date: string;
+};
 export const statSchema: Schema = new Schema(
 	{
 		station: {
@@ -18,12 +25,21 @@ export const statSchema: Schema = new Schema(
 		},
 		user: {
 			type: Schema.Types.ObjectId,
-			ref: "User"
+			ref: "User",
 		},
 	},
 	{
 		timestamps: true,
+		toObject: {
+			transform: function (doc, ret, options) {
+				console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+				ret.id = ret._id;
+				delete ret._id;
+				delete ret.__v;
+				return ret;
+			},
+		},
 	}
 );
 
-export const Stat: Model<IStat> = model<IStat>("Stat", statSchema);
+export const Stat: Model<StatModel> = model<StatModel>("Stat", statSchema);

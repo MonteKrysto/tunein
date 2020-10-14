@@ -1,29 +1,30 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Box, Grid } from "@chakra-ui/core";
-import { Card } from "../components/Card";
-import axios from "axios";
+import React from "react";
+import { Stations } from "../components/Stations";
+import { Box, Grid, Skeleton } from "@chakra-ui/core";
+import { QueryCache, ReactQueryCacheProvider } from "react-query";
+import { useStations } from "../hooks/useStations";
 
-const Home = (props) => {
-	const [data, setData] = useState();
+// Cache the results
+const queryCache = new QueryCache();
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const result = await axios(
-				"https://s3-us-west-1.amazonaws.com/cdn-web.tunein.com/stations.json"
-			);
-			console.log("result: ", result);
-			setData(result.data.data);
-		};
+/**
+ * Display all the available stations
+ */
+const Home = () => {
+	const { data, error, isFetching } = useStations();
 
-		fetchData();
-	}, []);
-
+  if(error) return <div>Error</div>;
+  
 	return (
-		<Box d="flex" justifyContent="center" mt="10" width="100%">
-			<Grid templateColumns="repeat(3, 1fr)" gap={20}>
-				{data && data.map((d) => <Card key={d.id} data={d} />)}
-			</Grid>
-		</Box>
+		<ReactQueryCacheProvider queryCache={queryCache}>
+			<Box d="flex" justifyContent="center" mt="10" width="100%">
+				<Skeleton isLoaded={!isFetching}>
+					<Grid templateColumns="repeat(3, 1fr)" gap={20}>
+						<Stations data={data} />
+					</Grid>
+				</Skeleton>
+			</Box>
+		</ReactQueryCacheProvider>
 	);
 };
 

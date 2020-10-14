@@ -50,6 +50,7 @@ const Header = (props) => {
 				<MenuItems to="/">Docs</MenuItems>
 				<MenuItems to="/history">History</MenuItems>
 				<MenuItems to="/favorites">Favorites</MenuItems>
+        <MenuItems to="/discover">Discover</MenuItems>
 			</Box>
 
 			<Box

@@ -13,6 +13,10 @@ interface Signup {
 	password: string;
 }
 class UserService {
+
+	/**
+	 * Register a new user with an email and password
+	 */
 	signup = async ({ email, password }: Signup) => {
 		try {
 			// Check if this email is already registered, if so throw an error
@@ -31,6 +35,10 @@ class UserService {
 		}
 	};
 
+
+	/**
+	 * Login
+	 */
 	signin = async ({ email, password }: Signin) => {
 		try {
 			const user = await User.findOne({ email });
